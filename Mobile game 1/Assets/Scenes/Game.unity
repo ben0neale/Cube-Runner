@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -2285,9 +2286,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    m_HighlightedColor: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 0.39215687}
-    m_PressedColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.39215687}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
+    m_HighlightedColor: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 0.19607843}
+    m_PressedColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.29411766}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0.39215687}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2340,7 +2341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2419,9 +2420,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.39215687}
-    m_HighlightedColor: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 0.39215687}
-    m_PressedColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.39215687}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
+    m_HighlightedColor: {r: 0.25882354, g: 0.25882354, b: 0.25882354, a: 0.19607843}
+    m_PressedColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.29411766}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0.39215687}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2474,7 +2475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3331,7 +3332,7 @@ PrefabInstance:
     - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
         type: 3}
       propertyPath: Jumpspeed
-      value: 1200
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
         type: 3}
@@ -3346,7 +3347,7 @@ PrefabInstance:
     - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
         type: 3}
       propertyPath: Nomralspeed
-      value: 1500
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
         type: 3}
