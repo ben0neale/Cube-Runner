@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     bool deathExplosion = false;
     bool jumping = false;
 
-    int speedChange = 100;
+    int speedChange = 25;
 
     public static GameManager.State PlayerState;
 
@@ -67,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
     {
         StateText.text = "State: " + PlayerState.ToString();
            
+
+        // dont think you should check for input in FixedUpdate
         #if UNITY_STANDALONE
         float x = Input.GetAxis("Horizontal");
         if (!dead)
@@ -103,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void jump()
+    public void CheckJump()
     {
 
 #if UNITY_IOS || UNITY_ANDROID
@@ -157,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 #endif
-        jump();
+        CheckJump();
 
         if (ButtonController.gameMode == ButtonController.GameMode.Normal)
             ChangeState();
