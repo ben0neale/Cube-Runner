@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     public void jump()
     {
 
-#if UNITY_IOS
+#if UNITY_IOS || UNITY_ANDROID
         //jump
 
         if (grounded)
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_IOS
+#if UNITY_IOS || UNITY_ANDROID
         if (Input.touches.Length > 0)
         {
             foreach (Touch touch in Input.touches)
