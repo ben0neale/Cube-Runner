@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     int speedChange = 100;
 
+    float multiplier = 0f;
+
     public static GameManager.State PlayerState;
 
     bool isTouchDown = false;
@@ -109,14 +111,10 @@ public class PlayerMovement : MonoBehaviour
 #if UNITY_IOS
         //jump
 
-        if (grounded)
+        if (PlayerState == GameManager.State.Jump && grounded)
         {
             RB.AddForce(0, JumpHeight, 0);
             JumpNoise.Play();
-        }
-        else
-        {
-            RB.velocity = new Vector3(0 * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
         }
 
 #endif
@@ -146,18 +144,22 @@ public class PlayerMovement : MonoBehaviour
                     if (touch.position.x < Screen.width / 2)
                     {
                         //move left
-                        RB.velocity = new Vector3(-1.0f * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+                        multiplier = -1f;
                     }
                     else
                     {
                         //move right
-                        RB.velocity = new Vector3(1.0f * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+                        multiplier = 1f;
                     }
                 }
             }
         }
+        else
+        {
+            multiplier = 0f;
+        }
+        RB.velocity = new Vector3(multiplier * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
 #endif
-        jump();
 
         if (ButtonController.gameMode == ButtonController.GameMode.Normal)
             ChangeState();
