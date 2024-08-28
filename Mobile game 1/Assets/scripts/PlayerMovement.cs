@@ -39,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        Nomralspeed = 1000;
-        Jumpspeed = 700;
         changestatemini = 190;
         FinalScore = 0;
         DeathTimer = 1.5f;
@@ -69,13 +67,13 @@ public class PlayerMovement : MonoBehaviour
     {
         StateText.text = "State: " + PlayerState.ToString();
            
-        #if UNITY_STANDALONE
+/*        #if UNITY_STANDALONE*/
         float x = Input.GetAxis("Horizontal");
         if (!dead)
         {
             RB.velocity = new Vector3(x * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
         }
-        #endif
+/*        #endif*/
  
 
         StateChanges();
@@ -105,6 +103,41 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+#if UNITY_IOS
+        if (Input.touches.Length > 0)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Stationary)
+                {
+                    if (touch.position.x < Screen.width / 2)
+                    {
+                        //move left
+                        multiplier = -1f;
+                    }
+                    else
+                    {
+                        //move right
+                        multiplier = 1f;
+                    }
+                }
+                else
+                    multiplier = 0f;
+            }
+        }
+        else
+        {
+            multiplier = 0f;
+        }
+        RB.velocity = new Vector3(multiplier * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+#endif
+
+        if (ButtonController.gameMode == ButtonController.GameMode.Normal)
+            ChangeState();
+    }
+
     public void jump()
     {
 
@@ -113,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (PlayerState == GameManager.State.Jump && grounded)
         {
+            print("JIMPINGGGGGG");
             RB.AddForce(0, JumpHeight, 0);
             JumpNoise.Play();
         }
@@ -128,42 +162,8 @@ public class PlayerMovement : MonoBehaviour
 #endif
     }
 
-    private void Update()
-    {
-#if UNITY_IOS
-        if (Input.touches.Length > 0)
-        {
-            foreach (Touch touch in Input.touches)
-            {
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    return;
-                }
-                else if (touch.phase == TouchPhase.Stationary)
-                {
-                    if (touch.position.x < Screen.width / 2)
-                    {
-                        //move left
-                        multiplier = -1f;
-                    }
-                    else
-                    {
-                        //move right
-                        multiplier = 1f;
-                    }
-                }
-            }
-        }
-        else
-        {
-            multiplier = 0f;
-        }
-        RB.velocity = new Vector3(multiplier * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
-#endif
+   
 
-        if (ButtonController.gameMode == ButtonController.GameMode.Normal)
-            ChangeState();
-    }
 
     private void StateChanges()
     {

@@ -38,7 +38,7 @@ public class SoundController : MonoBehaviour
 
         yield return new WaitForSeconds(10);
 
-        InGame.pitch += .05f;
+        //InGame.pitch += .05f;
         speed = false;
     }
 }
