@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                     {
                         int random = Random.Range(0, Presets.Length);
                         Instantiate(Presets[random], new Vector3(0, -platformYpos, ((PlatformCount - .5f) * 130) + 16.25f + (i * 32.5f)), Quaternion.identity);
-                        platformYpos += .001f;
+                        platformYpos += .01f;
                     }
 
                    // int random1 = Random.Range(0, PowerUps.Length);
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
                     PlatformCount++;
                     PlatformspawncountTemp++;
-                    platformYpos += .001f;
+                    platformYpos += .01f;
                 }
                 break;
             case State.Gravity:

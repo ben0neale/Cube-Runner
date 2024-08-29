@@ -29,7 +29,9 @@ public class PlayerMovement : MonoBehaviour
     bool deathExplosion = false;
     bool jumping = false;
 
-    int speedChange = 100;
+    int speedChange = 1;
+    public float SpeedChangeTime = 1f;
+    private float speedChangeTime;
 
     float multiplier = 0f;
 
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        speedChangeTime = SpeedChangeTime;
         changestatemini = 190;
         FinalScore = 0;
         DeathTimer = 1.5f;
@@ -136,6 +139,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (ButtonController.gameMode == ButtonController.GameMode.Normal)
             ChangeState();
+
+        if(speedChangeTime <= 0)
+        {
+            speedChangeTime = SpeedChangeTime;
+            SpeedChange();
+        }
+        else
+            speedChangeTime -= Time.deltaTime;
     }
 
     public void jump()
@@ -163,7 +174,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
    
-
+    private void SpeedChange()
+    {
+        Nomralspeed += speedChange;
+        Jumpspeed += speedChange;
+    }
 
     private void StateChanges()
     {
@@ -186,12 +201,12 @@ public class PlayerMovement : MonoBehaviour
             if (PlayerState == GameManager.State.Dodge)
             {
                 PlayerState = GameManager.State.Jump;
-                Nomralspeed += speedChange;
+                //Nomralspeed += speedChange;
             }
             else if (PlayerState == GameManager.State.Jump)
             {
                 PlayerState = GameManager.State.Dodge;
-                Jumpspeed += speedChange;
+                //Jumpspeed += speedChange;
             }
 
         }
