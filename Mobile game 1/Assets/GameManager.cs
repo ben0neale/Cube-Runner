@@ -35,6 +35,15 @@ public class GameManager : MonoBehaviour
 
     public static State GameState;
 
+    public enum GameMode
+    {
+        Normal,
+        Jump,
+        dodge
+    }
+
+    public static GameMode gameMode;
+
     float PlatformCount;
     float PlayerStartZ;
     int PlatformspawncountTemp;
@@ -53,11 +62,11 @@ public class GameManager : MonoBehaviour
         InterimCount = 0;
         platformYpos = .01f;
 
-        if (ButtonController.gameMode == ButtonController.GameMode.Jump)
+        if (gameMode == GameMode.Jump)
         {
             GameState = State.Jump;
         }
-        else if (ButtonController.gameMode == ButtonController.GameMode.dodge)
+        else if (gameMode == GameMode.dodge)
         {
             GameState = State.Dodge;
         }
@@ -75,7 +84,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ButtonController.gameMode == ButtonController.GameMode.Normal)
+        if (gameMode == GameMode.Normal)
         {
             ChangeState();
         }

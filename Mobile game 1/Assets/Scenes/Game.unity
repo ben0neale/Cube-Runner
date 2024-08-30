@@ -4360,20 +4360,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
         type: 3}
-      propertyPath: Jumpspeed
-      value: 700
-      objectReference: {fileID: 0}
-    - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
-        type: 3}
       propertyPath: StateText
       value: 
       objectReference: {fileID: 2115751831}
-    - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
-        type: 3}
-      propertyPath: Nomralspeed
-      value: 700
-      objectReference: {fileID: 0}
-    - target: {fileID: 2152479597474713462, guid: 7595b6d004092d541854e27ac6486960,
+    - target: {fileID: 4902267587745561430, guid: 7595b6d004092d541854e27ac6486960,
         type: 3}
       propertyPath: continueScreen
       value: 
@@ -4381,15 +4371,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2152479597474713417, guid: 7595b6d004092d541854e27ac6486960,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2152479597488720665}
-    - targetCorrespondingSourceObject: {fileID: 2152479597474713417, guid: 7595b6d004092d541854e27ac6486960,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2152479597488720666}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7595b6d004092d541854e27ac6486960, type: 3}
 --- !u!54 &2152479597488720663 stripped
 Rigidbody:
@@ -4407,36 +4389,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1954b6a27930d4544a673341f69ffed1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2152479597488720665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56018015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cddfd22751fb184a88717b258c32e8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  continueScreen: {fileID: 1915448312}
-  BrokenPlayer: {fileID: 7961129302817592776, guid: 784fde382c8cdae418f3a9a1cb427b9a,
-    type: 3}
-  loadscene: 0
-  FinalScore: 0
-  dead: 0
---- !u!114 &2152479597488720666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56018015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e71428789c2c2441af85acd4a467ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2294327107258738659

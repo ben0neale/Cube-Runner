@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody RB;
     [SerializeField] float speed = 0f;
     [SerializeField] float Nomralspeed = 1200;
-    [SerializeField] float Jumpspeed = 600;
     [SerializeField] float Xspeed = 500;
     [SerializeField] int JumpHeight = 400;
 
@@ -18,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource JumpNoise;
 
     bool grounded = false;
-    int changestatemini = 190;
+
     bool jumping = false;
 
     int speedChange = 1;
@@ -27,69 +26,66 @@ public class PlayerMovement : MonoBehaviour
 
     float multiplier = 0f;
 
-    public static GameManager.State PlayerState;
-
     bool isTouchDown = false;
 
     private void Start()
     {
         speedChangeTime = SpeedChangeTime;
-        changestatemini = 190;
-
-
-
-        if (ButtonController.gameMode == ButtonController.GameMode.Jump)
-        {
-            PlayerState = GameManager.State.Jump;
-            speed = Jumpspeed;
-        }
-        else if (ButtonController.gameMode == ButtonController.GameMode.dodge)
-        {
-            PlayerState = GameManager.State.Dodge;
-            speed = Nomralspeed;
-        }
+        //Set active state dependent on selected gamemode
+        if (GameManager.gameMode == GameManager.GameMode.Jump) { PlayerStateChange.PlayerState = GameManager.State.Jump; }
+            
+        else if (GameManager.gameMode == GameManager.GameMode.dodge) { PlayerStateChange.PlayerState = GameManager.State.Dodge; }
+            
         else
-        {
-            PlayerState = GameManager.State.Dodge;
-        }
+            PlayerStateChange.PlayerState = GameManager.State.Dodge;
 
+        speed = Nomralspeed;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        StateText.text = "State: " + PlayerState.ToString();
+        StateText.text = "State: " + PlayerStateChange.PlayerState.ToString();
+
+        //When in normal mode, change between jump and dodge states
+        if (GameManager.gameMode == GameManager.GameMode.Normal) { GetComponent<PlayerStateChange>().ChangeState(); }
            
-/*        #if UNITY_STANDALONE*/
-        float x = Input.GetAxis("Horizontal");
-        if (!GetComponent<PlayerDeath>().dead)
+        //Increase Speed at interval
+        if (speedChangeTime <= 0)
         {
-            RB.velocity = new Vector3(x * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+            speedChangeTime = SpeedChangeTime;
+            SpeedIncrease();
         }
-/*        #endif*/
- 
+        else
+            speedChangeTime -= Time.deltaTime;
 
-        StateChanges();
-        
+        // IOS ONLY -------------------------------------------------------------------------------------------
 
+#if UNITY_IOS
+        IOSControls();
+#endif
 
-        if ((int.Parse(GameManager.ScoreText.text) - 65) % 260 == 0 && int.Parse(GameManager.ScoreText.text) > changestatemini)
+        // WINDOWS ONLY + TESTING --------------------------------------------------------------------------------
+        WindowsControls();
+    }
+
+    public void jump()
+    {
+        if (PlayerStateChange.PlayerState == GameManager.State.Jump && grounded)
         {
-            changestatemini += 260;
-            if (ButtonController.gameMode == ButtonController.GameMode.dodge)
-            {
-                Nomralspeed += speedChange;
-            }
-            else if (ButtonController.gameMode == ButtonController.GameMode.Jump)
-            {
-                Jumpspeed += speedChange;
-            }
+            RB.AddForce(0, JumpHeight, 0);
+            JumpNoise.Play();
         }
     }
 
-    private void Update()
+    private void SpeedIncrease()
     {
-#if UNITY_IOS
+        Nomralspeed += speedChange;
+    }
+
+    private void IOSControls()
+    {
+        //Touch movenet left and right - Swipt to jump control from another script
         if (Input.touches.Length > 0)
         {
             foreach (Touch touch in Input.touches)
@@ -116,81 +112,22 @@ public class PlayerMovement : MonoBehaviour
             multiplier = 0f;
         }
         RB.velocity = new Vector3(multiplier * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
-#endif
-
-        if (ButtonController.gameMode == ButtonController.GameMode.Normal)
-            ChangeState();
-
-        if(speedChangeTime <= 0)
-        {
-            speedChangeTime = SpeedChangeTime;
-            SpeedChange();
-        }
-        else
-            speedChangeTime -= Time.deltaTime;
     }
 
-    public void jump()
+    private void WindowsControls()
     {
-
-#if UNITY_IOS
-        //jump
-
-        if (PlayerState == GameManager.State.Jump && grounded)
+        float x = Input.GetAxis("Horizontal");
+        if (!GetComponent<PlayerDeath>().dead)
         {
-            print("JIMPINGGGGGG");
-            RB.AddForce(0, JumpHeight, 0);
-            JumpNoise.Play();
+            RB.velocity = new Vector3(x * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
         }
 
-#endif
-
-#if UNITY_STANDALONE
-        if (PlayerState == GameManager.State.Jump && grounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            RB.AddForce(0, JumpHeight, 0);
-            JumpNoise.Play();
-        }
-#endif
+        if (Input.GetKeyDown(KeyCode.Space)) { jump(); }
     }
 
-   
-    private void SpeedChange()
-    {
-        Nomralspeed += speedChange;
-        Jumpspeed += speedChange;
-    }
 
-    private void StateChanges()
-    {
-        switch (PlayerState)
-        {
-            case GameManager.State.Dodge:
-                speed = Nomralspeed;
-                break;
-            case GameManager.State.Jump:
-                speed = Jumpspeed;
-                break;
-        }
-    }
+    /// COLLISION DETECTION -----------------------------------------------------------------------------------------
 
-    private void ChangeState()
-    {
-        if ((int.Parse(GameManager.ScoreText.text) - 65) % 260 == 0 && int.Parse(GameManager.ScoreText.text) > changestatemini)
-        {
-            changestatemini += 260;
-            if (PlayerState == GameManager.State.Dodge)
-            {
-                PlayerState = GameManager.State.Jump;
-                //Nomralspeed += speedChange;
-            }
-            else if (PlayerState == GameManager.State.Jump)
-            {
-                PlayerState = GameManager.State.Dodge;
-                //Jumpspeed += speedChange;
-            }
-        }
-    }
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "ground")

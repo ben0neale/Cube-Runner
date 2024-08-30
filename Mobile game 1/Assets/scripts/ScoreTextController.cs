@@ -15,11 +15,11 @@ public class ScoreTextController : MonoBehaviour
     {
         Player = GameObject.Find("Player");
 
-        if (ButtonController.gameMode == ButtonController.GameMode.Normal)
+        if (GameManager.gameMode == GameManager.GameMode.Normal)
         {
             HighScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         }
-        else if (ButtonController.gameMode == ButtonController.GameMode.Jump)
+        else if (GameManager.gameMode == GameManager.GameMode.Jump)
         {
             HighScore.text = PlayerPrefs.GetInt("HighScore 2", 0).ToString();
         }
@@ -35,17 +35,17 @@ public class ScoreTextController : MonoBehaviour
     {
         score.text = Player.GetComponent<PlayerDeath>().FinalScore.ToString();
 
-        if (Player.GetComponent<PlayerDeath>().FinalScore > PlayerPrefs.GetInt("HighScore", 0) && ButtonController.gameMode == ButtonController.GameMode.Normal)
+        if (Player.GetComponent<PlayerDeath>().FinalScore > PlayerPrefs.GetInt("HighScore", 0) && GameManager.gameMode == GameManager.GameMode.Normal)
         {
             PlayerPrefs.SetInt("HighScore", Player.GetComponent<PlayerDeath>().FinalScore);
             HighScore.text = Player.GetComponent<PlayerDeath>().FinalScore.ToString();
         }
-        else if (Player.GetComponent<PlayerDeath>().FinalScore > PlayerPrefs.GetInt("HighScore 2", 0) && ButtonController.gameMode == ButtonController.GameMode.Jump)
+        else if (Player.GetComponent<PlayerDeath>().FinalScore > PlayerPrefs.GetInt("HighScore 2", 0) && GameManager.gameMode == GameManager.GameMode.Jump)
         {
             PlayerPrefs.SetInt("HighScore 2", Player.GetComponent<PlayerDeath>().FinalScore);
             HighScore.text = Player.GetComponent<PlayerDeath>().FinalScore.ToString();
         }
-        else if((Player.GetComponent<PlayerDeath>().FinalScore > PlayerPrefs.GetInt("HighScore 3", 0) && ButtonController.gameMode == ButtonController.GameMode.dodge))
+        else if((Player.GetComponent<PlayerDeath>().FinalScore > PlayerPrefs.GetInt("HighScore 3", 0) && GameManager.gameMode == GameManager.GameMode.dodge))
         {
             PlayerPrefs.SetInt("HighScore 3", Player.GetComponent<PlayerDeath>().FinalScore);
             HighScore.text = Player.GetComponent<PlayerDeath>().FinalScore.ToString();
