@@ -15,17 +15,16 @@ public class Ads : MonoBehaviour, IUnityAdsInitializationListener
 
     public void InitializeAds()
     {
-        /*#if UNITY_IOS
-                _gameId = _iOSGameId;
-        #elif UNITY_ANDROID
-                    _gameId = _androidGameId;
-        #elif UNITY_EDITOR
-                    _gameId = _androidGameId; //Only for testing the functionality in the Editor
-        #endif*/
-        _gameId = _androidGameId;
+    #if UNITY_IOS
+            _gameId = _iOSGameId;
+    #elif UNITY_ANDROID
+            _gameId = _androidGameId;
+    #elif UNITY_EDITOR
+            _gameId = _androidGameId; //Only for testing the functionality in the Editor
+    #endif
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
-            Advertisement.Initialize(_gameId, _testMode, this);
+            Advertisement.Initialize(_gameId, _testMode, this); 
         }
 
     }

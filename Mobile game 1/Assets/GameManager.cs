@@ -82,9 +82,9 @@ public class GameManager : MonoBehaviour
         StartState();
         LevelGeneration();
 
-        if (!PlayerMovement.dead)
+        if (!Player.GetComponent<PlayerDeath>().dead)
         {
-            GameManager.ScoreText.text = ((int)(Player.transform.position.z - PlayerStartZ)).ToString();
+            ScoreText.text = ((int)(Player.transform.position.z - PlayerStartZ)).ToString();
         } 
     }
 

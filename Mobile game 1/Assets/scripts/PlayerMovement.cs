@@ -13,20 +13,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float Jumpspeed = 600;
     [SerializeField] float Xspeed = 500;
     [SerializeField] int JumpHeight = 400;
-    [SerializeField] GameObject BrokenPlayer;
+
     [SerializeField] TextMeshProUGUI StateText;
     [SerializeField] AudioSource JumpNoise;
 
-    float swipeHight = 10.0f;
     bool grounded = false;
     int changestatemini = 190;
-
-    public static int FinalScore = 0;
-
-    float DeathTimer = 2f;
-    public static bool dead = false;
-    public static bool loadscene = false;
-    bool deathExplosion = false;
     bool jumping = false;
 
     int speedChange = 1;
@@ -43,10 +35,8 @@ public class PlayerMovement : MonoBehaviour
     {
         speedChangeTime = SpeedChangeTime;
         changestatemini = 190;
-        FinalScore = 0;
-        DeathTimer = 1.5f;
-        dead = false;
-        deathExplosion = false;
+
+
 
         if (ButtonController.gameMode == ButtonController.GameMode.Jump)
         {
@@ -72,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
            
 /*        #if UNITY_STANDALONE*/
         float x = Input.GetAxis("Horizontal");
-        if (!dead)
+        if (!GetComponent<PlayerDeath>().dead)
         {
             RB.velocity = new Vector3(x * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
         }
@@ -82,15 +72,6 @@ public class PlayerMovement : MonoBehaviour
         StateChanges();
         
 
-        if (transform.position.y < -5)
-        {
-            dead = true;
-        }
-
-        if (dead)
-        {
-            Death();
-        }
 
         if ((int.Parse(GameManager.ScoreText.text) - 65) % 260 == 0 && int.Parse(GameManager.ScoreText.text) > changestatemini)
         {
@@ -208,39 +189,8 @@ public class PlayerMovement : MonoBehaviour
                 PlayerState = GameManager.State.Dodge;
                 //Jumpspeed += speedChange;
             }
-
         }
     }
-
-    private void Death()
-    {
-        FinalScore = int.Parse(GameManager.ScoreText.text);
-
-        if (!deathExplosion)
-        {
-            transform.localScale = new Vector3(0, 0, 0);
-            Instantiate(BrokenPlayer, transform.position, Quaternion.identity);
-            deathExplosion = true;
-        }
-
-        if (DeathTimer <= 0)
-        {
-            loadscene = true;
-        }
-        else
-        {
-            DeathTimer -= Time.deltaTime;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Obstical" && !dead)
-        {
-            dead = true;
-        }
-    }
-
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "ground")
