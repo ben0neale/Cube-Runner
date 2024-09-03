@@ -8,27 +8,35 @@ using TMPro;
 public class ScoreTextController : MonoBehaviour
 {
     GameObject Player;
-    [SerializeField] TextMeshProUGUI score;
-    [SerializeField] TextMeshProUGUI HighScore;
+    TextMeshProUGUI score;
+    TextMeshProUGUI HighScore;
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         Player = GameObject.Find("Player");
+        if(SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            score = GameObject.Find("ScoreTXt").GetComponent<TextMeshProUGUI>();
+            HighScore = GameObject.Find("HighscoreTXT").GetComponent<TextMeshProUGUI>();
 
-        if (GameManager.gameMode == GameManager.GameMode.Normal)
-        {
-            HighScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
-        }
-        else if (GameManager.gameMode == GameManager.GameMode.Jump)
-        {
-            HighScore.text = PlayerPrefs.GetInt("HighScore 2", 0).ToString();
-        }
-        else
-        {
-            HighScore.text = PlayerPrefs.GetInt("HighScore 3", 0).ToString();
+            if (GameManager.gameMode == GameManager.GameMode.Normal)
+            {
+                HighScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
+            }
+            else if (GameManager.gameMode == GameManager.GameMode.Jump)
+            {
+                HighScore.text = PlayerPrefs.GetInt("HighScore 2", 0).ToString();
+            }
+            else
+            {
+                HighScore.text = PlayerPrefs.GetInt("HighScore 3", 0).ToString();
+            }
+
+            UpdateScore();
         }
 
-        UpdateScore();
+
     }
 
     void UpdateScore()

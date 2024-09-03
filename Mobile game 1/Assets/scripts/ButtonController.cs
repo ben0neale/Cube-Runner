@@ -8,7 +8,6 @@ public class ButtonController : MonoBehaviour
 {
     [SerializeField] GameObject PausePanel;
     [SerializeField] AudioSource ClickSound;
-    private GameObject Player;
     private GameObject startTimer;
     public Animator Transition;
 
@@ -16,23 +15,10 @@ public class ButtonController : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        if (GameObject.Find("Player") != null)
-            Player = GameObject.Find("Player");
 
         if (GameObject.Find("StartTimer") != null)
             startTimer = GameObject.Find("StartTimer");
     }
-
-    private void Update()
-    {
-/*        if (Player.GetComponent<PlayerDeath>().loadscene)
-        {
-            Player.GetComponent<PlayerDeath>().loadscene = false;
-            StartCoroutine(transitioning(2));
-        }*/
-    }
-
-
 
     public void StartButton()
     {
