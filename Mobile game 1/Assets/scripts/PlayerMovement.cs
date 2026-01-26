@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         if (!GetComponent<PlayerDeath>().dead)
         {
-            RB.velocity = new Vector3(x * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+            RB.linearVelocity = new Vector3(x * Xspeed * Time.deltaTime, RB.linearVelocity.y, speed * Time.deltaTime);
         }
 /*        #endif*/
  
@@ -148,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
 #if UNITY_STANDALONE
         if (PlayerState == GameManager.State.Jump && grounded && Input.GetKeyDown(KeyCode.Space))
         {
+            print("Jump");
             RB.AddForce(0, JumpHeight, 0);
             JumpNoise.Play();
         }

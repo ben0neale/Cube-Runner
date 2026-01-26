@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameMode.unity
+    path: Assets/Scenes/Menu.unity
     guid: 5ee541ce0ea8ee54cb9f8497bc02e140
   - enabled: 1
     path: Assets/Scenes/Game.unity
@@ -15,3 +15,4 @@ EditorBuildSettings:
     path: Assets/Scenes/ShowScore.unity
     guid: fd087d8a513284f40991d915ced397de
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
