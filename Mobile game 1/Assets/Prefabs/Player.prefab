@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 2152479597474713460}
   - component: {fileID: 2152479597474713463}
   - component: {fileID: 2152479597474713459}
-  - component: {fileID: 2152479597474713462}
   - component: {fileID: 4206847707664986875}
+  - component: {fileID: 2152479597474713462}
   - component: {fileID: 5844774659584202280}
+  - component: {fileID: 4902267587745561430}
+  - component: {fileID: 8980438617447096072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -137,28 +139,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &2152479597474713462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2152479597474713417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1954b6a27930d4544a673341f69ffed1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RB: {fileID: 2152479597474713459}
-  speed: 0
-  Nomralspeed: 600
-  Jumpspeed: 600
-  Xspeed: 700
-  JumpHeight: 8500
-  BrokenPlayer: {fileID: 7961129302817592776, guid: 4904862cefe8f30478ab93a67787d949,
-    type: 3}
-  StateText: {fileID: 0}
-  JumpNoise: {fileID: 4206847707664986875}
 --- !u!82 &4206847707664986875
 AudioSource:
   m_ObjectHideFlags: 0
@@ -255,6 +235,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2152479597474713462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152479597474713417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1954b6a27930d4544a673341f69ffed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RB: {fileID: 2152479597474713459}
+  speed: 0
+  Nomralspeed: 700
+  Jumpspeed: 700
+  Xspeed: 700
+  JumpHeight: 8500
+  StateText: {fileID: 0}
+  JumpNoise: {fileID: 4206847707664986875}
+  SpeedChangeTime: 1
 --- !u!114 &5844774659584202280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +270,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectSwipeOnlyAfterRelease: 0
   SWIPE_THRESHOLD: 20
+--- !u!114 &4902267587745561430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152479597474713417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cddfd22751fb184a88717b258c32e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continueScreen: {fileID: 0}
+  BrokenPlayer: {fileID: 7961129302817592776, guid: 784fde382c8cdae418f3a9a1cb427b9a,
+    type: 3}
+  loadscene: 0
+  FinalScore: 0
+  dead: 0
+--- !u!114 &8980438617447096072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152479597474713417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e71428789c2c2441af85acd4a467ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3973049730375051736
 GameObject:
   m_ObjectHideFlags: 0

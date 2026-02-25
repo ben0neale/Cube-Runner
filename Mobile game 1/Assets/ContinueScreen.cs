@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ContinueScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    GameObject Player;
+
+    private void Start()
     {
-        
+        Player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -21,5 +22,6 @@ public class ContinueScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
+        Player.GetComponent<PlayerDeath>().ButtonControllerLoadScene();
     }
 }

@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField] GameObject continueScreen;
     [SerializeField] GameObject BrokenPlayer;
-    public bool loadscene = false;
+    [SerializeField] ScoreTextController scoreTextController;
+    [SerializeField] ButtonController buttonController;
     public int FinalScore = 0;
     public bool dead = false;
 
@@ -40,7 +42,6 @@ public class PlayerDeath : MonoBehaviour
 
     private IEnumerator Death()
     {
-
         FinalScore = int.Parse(GameManager.ScoreText.text);
 
         if (!deathExplosion)
@@ -59,14 +60,18 @@ public class PlayerDeath : MonoBehaviour
             continueScreen.SetActive(true);
         }
         else
-            loadscene = true;
+            ButtonControllerLoadScene();
+    }
+
+    public void ButtonControllerLoadScene()
+    {
+        buttonController.transitioning(2);
     }
 
     public void Continue()
     {
         dead = false;
         hasDied = false;
-        transform.localScale = Vector3.one;
         deathExplosion = false;
         continueScreen.SetActive(false);
     }
