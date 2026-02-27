@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -26,23 +26,23 @@ public class GameManager : MonoBehaviour
 
     float platformYpos;
 
-    public enum State
+    public enum 1State
     {
         Dodge,
         Jump,
         Gravity
     }
 
-    public static State GameState;
+    public static 1State GameState;
 
-    public enum GameMode
+    public enum 1GameMode
     {
         Normal,
         Jump,
         dodge
     }
 
-    public static GameMode gameMode;
+    public static 1GameMode gameMode;
 
     float PlatformCount;
     float PlayerStartZ;
@@ -182,3 +182,4 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+*/

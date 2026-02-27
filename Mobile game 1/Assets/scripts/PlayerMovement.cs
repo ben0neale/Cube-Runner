@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         //Increase Speed at interval
         if (speedChangeTime <= 0)
         {
-            RB.linearVelocity = new Vector3(x * Xspeed * Time.deltaTime, RB.linearVelocity.y, speed * Time.deltaTime);
+            RB.linearVelocity = new Vector3(RB.linearVelocity.x * Xspeed * Time.deltaTime, RB.linearVelocity.y, speed * Time.deltaTime);
         }
         else
             speedChangeTime -= Time.deltaTime;
@@ -110,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         {
             multiplier = 0f;
         }
-        RB.velocity = new Vector3(multiplier * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+        RB.linearVelocity = new Vector3(multiplier * Xspeed * Time.deltaTime, RB.linearVelocity.y, speed * Time.deltaTime);
     }
 
     private void WindowsControls()
@@ -118,13 +118,13 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         if (!GetComponent<PlayerDeath>().dead)
         {
-            RB.velocity = new Vector3(x * Xspeed * Time.deltaTime, RB.velocity.y, speed * Time.deltaTime);
+            RB.linearVelocity = new Vector3(x * Xspeed * Time.deltaTime, RB.linearVelocity.y, speed * Time.deltaTime);
         }
 
-#endif
+//#endif
 
 #if UNITY_STANDALONE
-        if (PlayerState == GameManager.State.Jump && grounded && Input.GetKeyDown(KeyCode.Space))
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             print("Jump");
             RB.AddForce(0, JumpHeight, 0);
@@ -161,3 +161,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+*/

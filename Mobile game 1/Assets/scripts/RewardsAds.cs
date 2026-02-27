@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
@@ -86,4 +86,4 @@ public class RewardAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowList
         // Clean up the button listeners:
         _showAdButton.onClick.RemoveAllListeners();
     }
-}
+}*/
